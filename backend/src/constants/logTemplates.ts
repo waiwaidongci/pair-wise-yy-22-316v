@@ -3,5 +3,19 @@ export const LOG_TEMPLATES = {
   DamageRecord: ["DamageRecord.create", "DamageRecord.update", "DamageRecord.status", "DamageRecord.export"],
   RestorationPlan: ["RestorationPlan.create", "RestorationPlan.update", "RestorationPlan.status", "RestorationPlan.export"],
   RestorationStep: ["RestorationStep.create", "RestorationStep.update", "RestorationStep.status", "RestorationStep.export"],
-  ImageVersion: ["ImageVersion.create", "ImageVersion.update", "ImageVersion.status", "ImageVersion.export"]
+  ImageVersion: ["ImageVersion.create", "ImageVersion.update", "ImageVersion.status", "ImageVersion.export"],
+  OfflineBatch: [
+    "OfflineBatch.receive",
+    "OfflineBatch.retransmit",
+    "OfflineBatch.merge",
+    "OfflineBatch.retry",
+    "OfflineBatch.conflict",
+    "OfflineBatch.resolve"
+  ],
+  MergeConflict: [
+    "MergeConflict.detect",
+    "MergeConflict.resolve",
+    "MergeConflict.discard",
+    "MergeConflict.blockArchive"
+  ]
 };

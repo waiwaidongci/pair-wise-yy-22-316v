@@ -1,1 +1,10 @@
-import { seed } from "../seed"; export const damageRecordRepository = { findAll: () => seed.damageRecord, save: (row: unknown) => row };
+import { centralStore } from "./centralStore";
+import type { DamageRecord } from "../models/DamageRecord";
+
+export const damageRecordRepository = {
+  findAll: (): DamageRecord[] => centralStore.damageRecord,
+  save: (row: DamageRecord): DamageRecord => {
+    centralStore.damageRecord.push(row);
+    return row;
+  }
+};

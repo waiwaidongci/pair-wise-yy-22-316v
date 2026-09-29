@@ -1,0 +1,8 @@
+export const OFFLINE_BATCH_STATUS = {
+  PENDING: "PENDING",
+  MERGED: "MERGED",
+  MERGED_WITH_CONFLICTS: "MERGED_WITH_CONFLICTS",
+  FAILED: "FAILED"
+} as const;
+
+export type OfflineBatchStatus = (typeof OFFLINE_BATCH_STATUS)[keyof typeof OFFLINE_BATCH_STATUS];

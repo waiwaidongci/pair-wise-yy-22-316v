@@ -75,7 +75,8 @@ export const seed = {
       "method": "method 1",
       "risk_assessment": "risk assessment 1",
       "approval_status": "SUBMITTED",
-      "owner_id": 1
+      "owner_id": 1,
+      "revision_no": 3
     },
     {
       "id": 2,
@@ -85,7 +86,8 @@ export const seed = {
       "method": "method 2",
       "risk_assessment": "risk assessment 2",
       "approval_status": "APPROVED",
-      "owner_id": 2
+      "owner_id": 2,
+      "revision_no": 2
     },
     {
       "id": 3,
@@ -95,7 +97,8 @@ export const seed = {
       "method": "method 3",
       "risk_assessment": "risk assessment 3",
       "approval_status": "DRAFT",
-      "owner_id": 3
+      "owner_id": 3,
+      "revision_no": 1
     }
   ],
   "restorationStep": [

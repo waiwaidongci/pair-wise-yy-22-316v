@@ -18,5 +18,9 @@ export const routes = [
   {
     "name": "影像版本",
     "route": "/images"
+  },
+  {
+    "name": "离线归并",
+    "route": "/offline-sync"
   }
 ] as const;

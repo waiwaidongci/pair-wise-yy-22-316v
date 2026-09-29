@@ -29,7 +29,8 @@ CREATE TABLE IF NOT EXISTS restoration_plan (
   method TEXT,
   risk_assessment TEXT,
   approval_status TEXT,
-  owner_id TEXT
+  owner_id TEXT,
+  revision_no INTEGER DEFAULT 1
 );
 
 CREATE TABLE IF NOT EXISTS restoration_step (
@@ -60,5 +61,61 @@ CREATE TABLE IF NOT EXISTS audit_log (
   action TEXT,
   target_type TEXT,
   target_id TEXT,
+  created_at TEXT
+);
+
+-- 离线批次：平板现场记录（修复步骤、材料用量、影像版本），回馆后按批次号 + 方案基线修订号归并。
+CREATE TABLE IF NOT EXISTS offline_batch (
+  id INTEGER PRIMARY KEY,
+  batch_no TEXT UNIQUE,
+  plan_id INTEGER,
+  device_id TEXT,
+  operator_id INTEGER,
+  base_revision_no INTEGER,
+  base_plan TEXT,
+  plan_patch TEXT,
+  steps TEXT,
+  images TEXT,
+  status TEXT,
+  attempts INTEGER DEFAULT 0,
+  result_id INTEGER,
+  last_error TEXT,
+  captured_at TEXT,
+  received_at TEXT
+);
+
+-- 归并冲突：双方改动各留一份（central_value / offline_value），未处理完阻止方案归档。
+CREATE TABLE IF NOT EXISTS merge_conflict (
+  id INTEGER PRIMARY KEY,
+  batch_no TEXT,
+  plan_id INTEGER,
+  conflict_type TEXT,
+  field_name TEXT,
+  target_id INTEGER,
+  base_value TEXT,
+  central_value TEXT,
+  offline_value TEXT,
+  status TEXT,
+  resolution TEXT,
+  resolved_by INTEGER,
+  resolved_at TEXT,
+  created_at TEXT
+);
+
+-- 归并结果：重传沿用首次结果（retransmit 由接口标记）。
+CREATE TABLE IF NOT EXISTS merge_result (
+  id INTEGER PRIMARY KEY,
+  batch_no TEXT,
+  plan_id INTEGER,
+  base_revision_no INTEGER,
+  merged_revision_no INTEGER,
+  status TEXT,
+  applied_fields TEXT,
+  applied_step_ids TEXT,
+  applied_image_versions TEXT,
+  held_step_count INTEGER DEFAULT 0,
+  held_image_count INTEGER DEFAULT 0,
+  plan_archivable INTEGER,
+
   created_at TEXT
 );
