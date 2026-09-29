@@ -18,5 +18,9 @@ export const routes = [
   {
     "name": "影像版本",
     "route": "/images"
+  },
+  {
+    "name": "离线批次",
+    "route": "/offline-batches"
   }
 ] as const;

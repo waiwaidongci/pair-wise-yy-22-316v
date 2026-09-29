@@ -10,6 +10,7 @@ import damageRecordRoutes from "./routes/DamageRecordRoutes";
 import restorationPlanRoutes from "./routes/RestorationPlanRoutes";
 import restorationStepRoutes from "./routes/RestorationStepRoutes";
 import imageVersionRoutes from "./routes/ImageVersionRoutes";
+import offlineBatchRoutes from "./routes/OfflineBatchRoutes";
 
 const app = express();
 app.use(cors());
@@ -23,5 +24,6 @@ app.use("/api/damage-record", damageRecordRoutes);
 app.use("/api/restoration-plan", restorationPlanRoutes);
 app.use("/api/restoration-step", restorationStepRoutes);
 app.use("/api/image-version", imageVersionRoutes);
+app.use("/api/offline-batch", offlineBatchRoutes);
 app.use(errorHandlerMiddleware);
 app.listen(config.port, () => console.log("relic-restore backend listening on", config.port));

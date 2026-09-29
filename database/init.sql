@@ -29,7 +29,8 @@ CREATE TABLE IF NOT EXISTS restoration_plan (
   method TEXT,
   risk_assessment TEXT,
   approval_status TEXT,
-  owner_id TEXT
+  owner_id TEXT,
+  revision INTEGER DEFAULT 1
 );
 
 CREATE TABLE IF NOT EXISTS restoration_step (
@@ -61,4 +62,19 @@ CREATE TABLE IF NOT EXISTS audit_log (
   target_type TEXT,
   target_id TEXT,
   created_at TEXT
+);
+
+CREATE TABLE IF NOT EXISTS offline_batch (
+  id INTEGER PRIMARY KEY,
+  batch_no TEXT UNIQUE,
+  plan_id TEXT,
+  base_revision INTEGER,
+  status TEXT,
+  payload JSONB,
+  created_by TEXT,
+  created_at TEXT,
+  merged_at TEXT,
+  result JSONB,
+  conflict_details JSONB,
+  retry_count INTEGER DEFAULT 0
 );

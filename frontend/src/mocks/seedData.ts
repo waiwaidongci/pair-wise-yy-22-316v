@@ -75,7 +75,8 @@ export const mockData = {
       "method": "method 1",
       "risk_assessment": "risk assessment 1",
       "approval_status": "SUBMITTED",
-      "owner_id": 1
+      "owner_id": 1,
+      "revision": 2
     },
     {
       "id": 2,
@@ -85,7 +86,8 @@ export const mockData = {
       "method": "method 2",
       "risk_assessment": "risk assessment 2",
       "approval_status": "APPROVED",
-      "owner_id": 2
+      "owner_id": 2,
+      "revision": 2
     },
     {
       "id": 3,
@@ -95,7 +97,8 @@ export const mockData = {
       "method": "method 3",
       "risk_assessment": "risk assessment 3",
       "approval_status": "DRAFT",
-      "owner_id": 3
+      "owner_id": 3,
+      "revision": 1
     }
   ],
   "restorationStep": [
@@ -160,6 +163,94 @@ export const mockData = {
       "file_path": "file path 3",
       "capture_at": "2026-06-13T09:00:00Z",
       "note": "note 3"
+    }
+  ],
+  "offlineBatch": [
+    {
+      "id": 1,
+      "batch_no": "BATCH-2026-0920-001",
+      "plan_id": 1,
+      "base_revision": 1,
+      "status": "MERGED",
+      "payload": {
+        "steps": [
+          { "step_order": 1, "technique": "表面清理", "material_used": "软毛刷、去离子水", "operator_id": 1, "step_status": "DRAFT", "finished_at": "2026-09-20T10:00:00Z" }
+        ],
+        "images": [
+          { "relic_id": 1, "plan_id": 1, "version_no": "offline-001", "image_type": "BEFORE", "file_path": "/offline/batch-001-1.png", "capture_at": "2026-09-20T10:05:00Z", "note": "修复前影像" }
+        ]
+      },
+      "created_by": 1,
+      "created_at": "2026-09-20T09:30:00Z",
+      "merged_at": "2026-09-20T11:00:00Z",
+      "result": { "merged_steps": 1, "merged_images": 1, "revision": 2 },
+      "conflict_details": null,
+      "retry_count": 0
+    },
+    {
+      "id": 2,
+      "batch_no": "BATCH-2026-0921-002",
+      "plan_id": 2,
+      "base_revision": 1,
+      "status": "CONFLICT",
+      "payload": {
+        "steps": [
+          { "step_order": 1, "technique": "加固处理", "material_used": "丙烯酸树脂", "operator_id": 2, "step_status": "DRAFT", "finished_at": "2026-09-21T14:00:00Z" }
+        ],
+        "images": []
+      },
+      "created_by": 2,
+      "created_at": "2026-09-21T13:30:00Z",
+      "merged_at": null,
+      "result": null,
+      "conflict_details": {
+        "base_revision": 1,
+        "current_revision": 2,
+        "conflicting_steps": [1],
+        "conflicting_images": [],
+        "message": "方案基线已变更，离线内容另存为冲突副本"
+      },
+      "retry_count": 0
+    },
+    {
+      "id": 3,
+      "batch_no": "BATCH-2026-0922-003",
+      "plan_id": 3,
+      "base_revision": 1,
+      "status": "FAILED",
+      "payload": {
+        "steps": [],
+        "images": [
+          { "relic_id": 3, "plan_id": 3, "version_no": "offline-003", "image_type": "AFTER", "file_path": "/offline/batch-003-1.png", "capture_at": "2026-09-22T16:00:00Z", "note": "修复后影像" }
+        ]
+      },
+      "created_by": 3,
+      "created_at": "2026-09-22T15:30:00Z",
+      "merged_at": null,
+      "result": null,
+      "conflict_details": { "error": "MERGE_FAILED" },
+      "retry_count": 1
+    },
+    {
+      "id": 4,
+      "batch_no": "BATCH-2026-0923-004",
+      "plan_id": 1,
+      "base_revision": 2,
+      "status": "PENDING",
+      "payload": {
+        "steps": [
+          { "step_order": 2, "technique": "补色处理", "material_used": "矿物颜料", "operator_id": 1, "step_status": "DRAFT", "finished_at": "2026-09-23T10:00:00Z" }
+        ],
+        "images": [
+          { "relic_id": 1, "plan_id": 1, "version_no": "offline-004", "image_type": "PROCESS", "file_path": "/offline/batch-004-1.png", "capture_at": "2026-09-23T10:10:00Z", "note": "补色过程" }
+        ]
+      },
+      "created_by": 1,
+      "created_at": "2026-09-23T09:00:00Z",
+      "merged_at": null,
+      "result": null,
+      "conflict_details": null,
+      "retry_count": 0
     }
   ]
 } as const;
